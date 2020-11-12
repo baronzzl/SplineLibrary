@@ -20,3 +20,12 @@ Makefile
 *-build-*
 *.autosave
 SplineDemo_Include.pri
+/debug/SplineDemo.tlog
+/debug
+/release
+*.stash
+/.vs/SplineDemo/v14
+*.filters
+ui_*.h
+*.db
+*.opendb

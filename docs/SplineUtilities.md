@@ -49,6 +49,8 @@ Arc Length Solver
 =============
 The arc length solver methods, found in `spline_library/utils/arclength.h` all deal with a similar question: Given a starting t value on the spline and a desired arc length, what secondary T value will yield my desired arc length? All methods listed here will accept any spline type. They will accept references to the parent Spline class, but they're all template functions on spline type, so it's possible to avoid virtual function calls by passing in a reference to a concrete spline type.
 
+在`spline_library / utils / arclength.h`中找到的弧长求解器方法都处理类似的问题：给定样条曲线上的起始t值和所需的弧长，计算其终点t。 该文件中列出的所有方法将接受任何样条线类型。 它们将接受对父样条线类的引用，但是它们都是样条线类型上的所有模板函数，因此可以通过传递对具体样条线类型的引用来避免虚拟函数调用。
+
 ### ArcLength::solveLength(const spline&, a, desiredLength)
 Given a spline, a starting T value on the spline `a`, and a desired arc length `desiredLength`, compute and return `b` that satisfies the condition `spline.arcLength(a, b) ~= desiredLength`
 
@@ -86,6 +88,8 @@ std::vector<float> partitionBoundaries = ArcLength::partition(mySpline, desiredA
 
 ### ArcLength::partitionN(const spline&, n)
 Given a spline and a number pf pieces `n`, divide the spline into `n` pieces such that each piece has the same arc length. Returns a `std::vector` containing n+1 T values marking the beginning/end of each partitoned piece.
+
+给定一个样条曲线和pf个“ n”个片段，将样条曲线分成“ n”个片段，以使每个片段具有相同的弧长。 返回一个`std :: vector`，其中包含n + 1个T值，这些值标记了每个分块的开始/结束。
 
 The first element in the returned vector is always 0, and the last element is always maxT.
 
