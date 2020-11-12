@@ -4,9 +4,15 @@ Spline Inverter
 =============
 The Spline Inverter object is used to answer the question "Given a data point (called the Query Point), what t value brings the spline closest to that point?" This can be used for query points which are on the spline itself, but it can also be used for points that are near the spline, or even for query points that are far away.
 
+Spline Inverter对象用于回答以下问题：“给定一个数据点（称为查询点），哪个t值使样条曲线最接近该点？” 它可用于样条曲线本身上的查询点，但也可用于样条曲线附近的点，甚至用于较远的查询点。
+
 An example use case is an AI system for a race track. The spline could present the optimal line through a curve in the track, and the AI system could use its current position as a query point to the Spline Inverter to get the closest point on the spline. This will tell the AI where it should be via the interpolated position, what direction it should be going via the interpolated tangent tangent, if it should be turning via the interpolated curvature, etc.
 
+一个示例用例是用于赛道的AI系统。 样条曲线可以通过轨迹中的曲线呈现最佳线，并且AI系统可以使用其当前位置作为样条Inverter的查询点，以获取样条曲线上的最近点。 这将告诉AI应该通过插值位置在哪里，应该通过插值切线切线走向什么方向，是否应该通过插值曲率来旋转等。
+
 This must be computed numerically - there is no reasonable analytic solution like there is for derivatives.
+
+这只能通过数值方式计算-没有像导数一样的解析解。
 
 To create a Spline Inverter, import `spline_library/utils/splineinverter.h`, and create a new `SplineInverter` object by passing a reference to a Spline to the constructor.
 ```c++
@@ -24,6 +30,10 @@ SplineInverter<QVector2D> inverter(*mySplinePtr);
 The SplineInverter stores a reference to the spline, so it should not live longer than the spline it refers to.
 
 In the SplineInverter constructor, it takes "samples" of the spline at regular intervals. By default it takes 10 samples per T, but this can be changed via a constructor parameter. When given a query point, it first finds the closest sample to the query point, then uses that sample location as the starting point for a refining algorithm.
+
+SplineInverter储存了对样条线的引用，因此它的生存期不应长于所引用的样条线。
+
+在SplineInverter构造函数中，它以固定间隔获取样条的“样本”。 默认情况下，每个T采样10个样本，但这可以通过构造函数参数进行更改。 给定查询点时，它首先找到与查询点最接近的样本，然后使用该样本位置作为优化算法的起点。
 
 ### findClosestT(queryPoint) const
 This method finds the closest sample to the query point, and uses that closest sample as a starting point for [Brent's Method](http://en.wikipedia.org/wiki/Brent%27s_method).
